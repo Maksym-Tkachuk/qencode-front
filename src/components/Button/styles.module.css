@@ -16,12 +16,12 @@
 
 .contained {
   background-color: #316fea;
-  border: 1px solid #d3d8dc;
   color: #fff;
+  border: 1px solid #d3d8dc;
 }
 
 .outlined {
-  border: 1px solid #d3d8dc;
-  color: #060e1e;
   background: transparent;
+  color: #060e1e;
+  border: 1px solid #d3d8dc;
 }
