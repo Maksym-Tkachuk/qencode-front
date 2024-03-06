@@ -33,14 +33,6 @@ body {
   line-height: 1.5;
 }
 
-html {
-  height: 100%;
-}
-
-#root {
-  height: 100%;
-}
-
 ul[class],
 ol[class] {
   list-style: none;
@@ -48,6 +40,9 @@ ol[class] {
 
 a:not([class]) {
   text-decoration-skip-ink: auto;
+}
+a {
+  text-decoration: none;
 }
 
 article > * + * {
