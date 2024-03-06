@@ -1,0 +1,14 @@
+.input {
+  padding: 13px 15px;
+  width: 100%;
+  border: 1px solid #d3d8dc;
+  border-radius: 8px;
+  font-family: 'Basis Grotesque Pro';
+  font-weight: 400;
+  font-size: 0.94rem;
+  line-height: 1.25rem;
+}
+
+input::placeholder {
+  color: #a1abb5;
+}
