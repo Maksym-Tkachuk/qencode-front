@@ -1,3 +1,7 @@
+.input_container {
+  position: relative;
+}
+
 .input {
   padding: 13px 15px;
   width: 100%;
@@ -12,4 +16,12 @@
 
 input::placeholder {
   color: #a1abb5;
+}
+
+.icon {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translate(0, -50%);
+  cursor: pointer;
 }
