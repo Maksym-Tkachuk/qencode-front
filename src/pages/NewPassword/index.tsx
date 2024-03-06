@@ -1,7 +1,7 @@
-import Text from 'src/components/Text'
+import { AuthLayout } from 'src/layouts/AuthLayout'
 
 const NewPassword = (): JSX.Element => {
-  return <Text variant="h1">Create new Password?</Text>
+  return <AuthLayout title="Create new Password?" />
 }
 
 export default NewPassword

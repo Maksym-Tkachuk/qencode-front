@@ -1,0 +1,14 @@
+.container {
+  margin: 0 auto;
+  margin-top: 100px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.text {
+  margin-top: 75px;
+}
+
+.content {
+  margin-top: 50px;
+}

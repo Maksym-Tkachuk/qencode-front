@@ -1,10 +1,10 @@
 import type { CSSProperties } from 'react'
 
 type StackProps = {
-  direction: CSSProperties['flexDirection']
-  align: CSSProperties['alignItems']
-  gap: CSSProperties['gap']
-  justifyContent: CSSProperties['justifyContent']
+  direction?: CSSProperties['flexDirection']
+  align?: CSSProperties['alignItems']
+  gap?: CSSProperties['gap']
+  justifyContent?: CSSProperties['justifyContent']
 } & React.HTMLAttributes<HTMLDivElement>
 
 const Stack = ({

@@ -1,7 +1,7 @@
-import Text from 'src/components/Text'
+import { AuthLayout } from 'src/layouts/AuthLayout'
 
 const ForgotPassword = (): JSX.Element => {
-  return <Text variant="h1">Log in to your account</Text>
+  return <AuthLayout title="Log in to your account" />
 }
 
 export default ForgotPassword
