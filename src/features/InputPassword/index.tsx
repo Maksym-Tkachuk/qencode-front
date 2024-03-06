@@ -8,7 +8,7 @@ type InputPasswordProps = {
   onChange?: (value: string) => void
 }
 
-const InputPassword = ({ onChange }: InputPasswordProps): JSX.Element => {
+export const InputPassword = ({ onChange }: InputPasswordProps): JSX.Element => {
   const [isVisible, setIsVisible] = useState(false)
 
   const handleVisible = (): void => {
@@ -30,5 +30,3 @@ const InputPassword = ({ onChange }: InputPasswordProps): JSX.Element => {
     </div>
   )
 }
-
-export default InputPassword
