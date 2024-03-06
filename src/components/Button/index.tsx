@@ -3,13 +3,14 @@ import s from 'src/components/Button/styles.module.css'
 type ButtonProps = {
   variant?: 'contained' | 'outlined'
   icon?: JSX.Element
-} & React.HTMLAttributes<HTMLButtonElement>
+} & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 const Button = ({
   variant = 'outlined',
   icon,
   children,
   className,
+
   ...props
 }: ButtonProps): JSX.Element => {
   return (

@@ -12,6 +12,7 @@ const Stack = ({
   direction = 'column',
   gap,
   justifyContent,
+  style,
   ...props
 }: StackProps): JSX.Element => {
   return (
@@ -22,6 +23,7 @@ const Stack = ({
         flexDirection: direction,
         gap,
         justifyContent,
+        ...style,
       }}
       {...props}
     />
