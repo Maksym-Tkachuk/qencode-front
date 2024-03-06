@@ -9,10 +9,15 @@ const Button = ({
   variant = 'outlined',
   icon,
   children,
+  className,
   ...props
 }: ButtonProps): JSX.Element => {
   return (
-    <button className={`${s[variant]} ${s.button}`} type="button" {...props}>
+    <button
+      className={`${s[variant]} ${s.button} ${className}`}
+      type="button"
+      {...props}
+    >
       {icon}
       <p className={s.text}>{children}</p>
     </button>

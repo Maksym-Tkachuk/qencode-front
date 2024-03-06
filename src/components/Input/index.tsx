@@ -4,11 +4,15 @@ type InputProps = {
   onChange?: (value: string) => void
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>
 
-const Input = ({ onChange = () => {}, ...props }: InputProps): JSX.Element => {
+const Input = ({
+  onChange = () => {},
+  className,
+  ...props
+}: InputProps): JSX.Element => {
   return (
     <input
       onChange={({ target }) => onChange(target.value)}
-      className={s.input}
+      className={`${s.input} ${className}`}
       type="text"
       {...props}
     />
