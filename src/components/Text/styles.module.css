@@ -28,3 +28,11 @@
   font-weight: 500;
   font-size: 0.75rem;
 }
+
+.error {
+  color: red;
+}
+
+.success {
+  color: green;
+}
