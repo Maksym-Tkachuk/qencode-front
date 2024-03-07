@@ -1,21 +1,31 @@
-import Button from 'src/components/Button'
-import Stack from 'src/components/Stack'
-import Text from 'src/components/Text'
-import { InputPassword } from 'src/features/InputPassword'
+import type { NewPasswordDataT } from 'src/features/NewPasswordForm/types'
+
+import { LocalStorageKeys } from 'src/constants'
+import { NewPasswordForm } from 'src/features/NewPasswordForm'
+import { useSetNewPassword } from 'src/hooks/useSetNewPassword'
 import { AuthLayout } from 'src/layouts/AuthLayout'
 
 const NewPassword = (): JSX.Element => {
+  const { error, isLoading, mutate } = useSetNewPassword()
+
+  const handleSubmit = (
+    { confirmPassword, password }: NewPasswordDataT,
+    reset: () => void,
+  ): void => {
+    mutate(
+      {
+        password_confirm: confirmPassword,
+        password,
+        token: localStorage.getItem(LocalStorageKeys.REFRESH_TOKEN) || '',
+        secret: localStorage.getItem(LocalStorageKeys.ACCESS_TOKEN) || '',
+      },
+      { onSuccess: reset },
+    )
+  }
+
   return (
     <AuthLayout title="Create new Password?">
-      <form>
-        <Stack gap={25}>
-          <InputPassword label={<Text variant="body1">Password</Text>} />
-          <InputPassword label={<Text variant="body1">Confirm Password</Text>} />
-          <Button type="submit" variant="contained">
-            Reset Password
-          </Button>
-        </Stack>
-      </form>
+      <NewPasswordForm onSubmit={handleSubmit} error={error} isLoading={isLoading} />
     </AuthLayout>
   )
 }

@@ -8,3 +8,8 @@ export type ResponseErrorT = {
   detail: DetailErrorT[] | string
   timestamp: number
 }
+
+export type FormT = {
+  error: Record<string, string>
+  isLoading: boolean
+}

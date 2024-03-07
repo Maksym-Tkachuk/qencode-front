@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import type { LoginFormDataT } from 'src/features/LoginForm/types'
+import type { FormT } from 'src/types'
 
 import Button from 'src/components/Button'
 import Input from 'src/components/Input'
@@ -14,9 +15,7 @@ import { RoutesPath } from 'src/router/routes'
 
 type LoginFormProps = {
   onSubmit: (data: LoginFormDataT, reset: () => void) => void
-  error: Record<string, string>
-  isLoading: boolean
-}
+} & FormT
 
 export const LoginForm = ({
   onSubmit,
@@ -47,11 +46,16 @@ export const LoginForm = ({
             type="email"
             placeholder="Work email"
             required
+            isError={!!error.email}
           />
           {error.email ? <Text status="error">{error.email}</Text> : null}
         </Stack>
         <Stack gap={5}>
-          <InputPassword onChange={setPassword} value={password} />
+          <InputPassword
+            onChange={setPassword}
+            value={password}
+            isError={!!error.password}
+          />
           {error.password ? <Text color="red">{error.password}</Text> : null}
         </Stack>
       </Stack>

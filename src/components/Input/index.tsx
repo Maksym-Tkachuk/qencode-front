@@ -7,6 +7,7 @@ type InputProps = {
   onChange?: (value: string) => void
   label?: ReactNode
   icon?: JSX.Element
+  isError?: boolean
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>
 
 const Input = ({
@@ -14,6 +15,7 @@ const Input = ({
   className,
   label,
   icon,
+  isError,
   ...props
 }: InputProps): JSX.Element => {
   return (
@@ -22,7 +24,7 @@ const Input = ({
       <div className={s.input_container}>
         <input
           onChange={({ target }) => onChange(target.value)}
-          className={`${s.input} ${className}`}
+          className={`${s.input} ${isError ? s.error : null} ${className}`}
           type="text"
           {...props}
         />

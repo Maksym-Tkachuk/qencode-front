@@ -25,3 +25,7 @@ input::placeholder {
   transform: translate(0, -50%);
   cursor: pointer;
 }
+
+.error {
+  border-color: red;
+}

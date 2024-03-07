@@ -9,12 +9,14 @@ type InputPasswordProps = {
   onChange?: (value: string) => void
   label?: ReactNode
   value?: string
+  isError?: boolean
 }
 
 export const InputPassword = ({
   onChange,
   value,
   label,
+  isError,
 }: InputPasswordProps): JSX.Element => {
   const [isVisible, setIsVisible] = useState(false)
 
@@ -31,6 +33,7 @@ export const InputPassword = ({
       value={value}
       minLength={8}
       required
+      isError={isError}
       icon={
         <div
           onClick={handleVisible}
