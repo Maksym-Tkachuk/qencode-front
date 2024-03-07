@@ -29,6 +29,10 @@ export const useSetNewPassword = () => {
       if (ErrorStatus.INVALID_USER === e.response?.status && isString(errorDetail)) {
         toast.error(errorDetail)
       }
+
+      if (e.response?.status && e.response?.status >= 500) {
+        toast.error('Server error!')
+      }
     },
   })
 

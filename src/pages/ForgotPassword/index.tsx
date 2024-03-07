@@ -1,25 +1,28 @@
-import Button from 'src/components/Button'
-import Input from 'src/components/Input'
-import Link from 'src/components/Link'
-import Stack from 'src/components/Stack'
+import type { ResetPasswordFormDataT } from 'src/features/ResetPasswordForm/types'
+
+import { ResetPasswordForm } from 'src/features/ResetPasswordForm'
+import { useResetPassword } from 'src/hooks/useResetPassword'
 import { AuthLayout } from 'src/layouts/AuthLayout'
-import { RoutesPath } from 'src/router/routes'
 
 const ForgotPassword = (): JSX.Element => {
+  const { error, isLoading, mutate } = useResetPassword()
+
+  const handleSubmit = async (
+    data: ResetPasswordFormDataT,
+    reset: () => void,
+  ): Promise<void> => {
+    mutate(data, {
+      onSuccess: reset,
+    })
+  }
+
   return (
     <AuthLayout title="Forgot Password?">
-      <form>
-        <Stack gap={25}>
-          <Input placeholder="Enter your email" />
-          <Button type="submit" variant="contained">
-            Send
-          </Button>
-
-          <Link to={RoutesPath.LOGIN}>
-            <Button>Cancel</Button>
-          </Link>
-        </Stack>
-      </form>
+      <ResetPasswordForm
+        error={error}
+        isLoading={isLoading}
+        onSubmit={handleSubmit}
+      />
     </AuthLayout>
   )
 }
