@@ -36,6 +36,8 @@ Before launching the application in production mode, you need to build the proje
 
 ## Navigation
 
+Website location: `https://main--qencode-front.netlify.app/`
+
 - `/` : This page allows users to log in to their accounts;
 - `/forgot-password` : Users can reset their password through this page if they have forgotten it;
 - `/new-password` : This page allows users to set a new password after resetting it.
