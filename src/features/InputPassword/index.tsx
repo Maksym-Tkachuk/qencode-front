@@ -31,8 +31,6 @@ export const InputPassword = ({
       type={isVisible ? 'text' : 'password'}
       onChange={onChange}
       value={value}
-      minLength={8}
-      required
       isError={isError}
       icon={
         <div

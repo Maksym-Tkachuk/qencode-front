@@ -2,6 +2,7 @@ import { useMutation } from 'react-query'
 import { toast } from 'react-toastify'
 
 import type { AxiosError } from 'axios'
+import type { LoginFormErrorFieldsT } from 'src/features/LoginForm/types'
 import type { LoginArgsT, ResponseLoginT } from 'src/services/api/login/types'
 import type { ResponseErrorT } from 'src/types'
 
@@ -42,7 +43,9 @@ export const useLogin = () => {
 
   return {
     isLoading,
-    error: error?.response ? parseError(error?.response?.data) : {},
+    error: error?.response
+      ? parseError<LoginFormErrorFieldsT>(error?.response?.data)
+      : {},
     mutate,
   }
 }

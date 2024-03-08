@@ -9,7 +9,8 @@ export type ResponseErrorT = {
   timestamp: number
 }
 
-export type FormT = {
-  error: Record<string, string>
+export type FormT<DataT, ErrorT> = {
+  onSubmit: (data: DataT, reset: () => void) => void
+  error: Partial<ErrorT>
   isLoading: boolean
 }

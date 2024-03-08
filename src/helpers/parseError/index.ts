@@ -2,8 +2,10 @@ import type { ResponseErrorT } from 'src/types'
 
 import { isString } from 'src/helpers/isString'
 
-export const parseError = ({ detail }: ResponseErrorT): Record<string, string> => {
-  if (isString(detail)) return {}
+export const parseError = <T extends Record<string, string>>({
+  detail,
+}: ResponseErrorT): T => {
+  if (isString(detail)) return {} as T
 
   const errorObject: Record<string, string> = {}
 
@@ -11,5 +13,5 @@ export const parseError = ({ detail }: ResponseErrorT): Record<string, string> =
     errorObject[field_name] = error
   })
 
-  return errorObject
+  return errorObject as T
 }
