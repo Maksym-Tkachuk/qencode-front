@@ -1,4 +1,6 @@
-import type { ReactNode } from 'react'
+import { forwardRef } from 'react'
+
+import type { LegacyRef, ReactNode } from 'react'
 
 import s from 'src/components/Input/styles.module.css'
 import Stack from 'src/components/Stack'
@@ -10,19 +12,16 @@ type InputProps = {
   isError?: boolean
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange'>
 
-const Input = ({
-  onChange = () => {},
-  className,
-  label,
-  icon,
-  isError,
-  ...props
-}: InputProps): JSX.Element => {
+const Input = (
+  { onChange = () => {}, className, label, icon, isError, ...props }: InputProps,
+  ref: LegacyRef<HTMLInputElement>,
+): JSX.Element => {
   return (
     <Stack gap={8}>
       {label}
       <div className={s.input_container}>
         <input
+          ref={ref}
           onChange={({ target }) => onChange(target.value)}
           className={`${s.input} ${isError ? s.error : null} ${className}`}
           type="text"
@@ -34,4 +33,4 @@ const Input = ({
   )
 }
 
-export default Input
+export default forwardRef(Input)
