@@ -33,3 +33,9 @@ Before launching the application in production mode, you need to build the proje
   ```
 
   This command will launch your application in a production environment, ready for real-world usage.
+
+## Navigation
+
+- `/` : This page allows users to log in to their accounts;
+- `/forgot-password` : Users can reset their password through this page if they have forgotten it;
+- `/new-password` : This page allows users to set a new password after resetting it.
