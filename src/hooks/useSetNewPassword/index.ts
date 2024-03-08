@@ -2,6 +2,7 @@ import { useMutation } from 'react-query'
 import { toast } from 'react-toastify'
 
 import type { AxiosError } from 'axios'
+import type { ResetPasswordFormErrorFieldsT } from 'src/features/ResetPasswordForm/types'
 import type {
   ResponseSetNewPasswordT,
   SetNewPasswordArgsT,
@@ -38,7 +39,9 @@ export const useSetNewPassword = () => {
 
   return {
     isLoading,
-    error: error?.response ? parseError(error?.response?.data) : {},
+    error: error?.response
+      ? parseError<ResetPasswordFormErrorFieldsT>(error?.response?.data)
+      : {},
     mutate,
   }
 }

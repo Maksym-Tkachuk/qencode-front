@@ -1,6 +1,11 @@
-import { useState } from 'react'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useMemo } from 'react'
+import { Controller, useForm } from 'react-hook-form'
 
-import type { ResetPasswordFormDataT } from 'src/features/ResetPasswordForm/types'
+import type {
+  ResetPasswordFormDataT,
+  ResetPasswordFormErrorFieldsT,
+} from 'src/features/ResetPasswordForm/types'
 import type { FormT } from 'src/types'
 
 import Button from 'src/components/Button'
@@ -9,39 +14,57 @@ import Link from 'src/components/Link'
 import Loader from 'src/components/Loader'
 import Stack from 'src/components/Stack'
 import Text from 'src/components/Text'
+import { schema } from 'src/features/ResetPasswordForm/schema'
 import { RoutesPath } from 'src/router/routes'
 
-type ResetPasswordFormProps = {
-  onSubmit: (data: ResetPasswordFormDataT, reset: () => void) => void
-} & FormT
+type ResetPasswordFormProps = FormT<
+  ResetPasswordFormDataT,
+  ResetPasswordFormErrorFieldsT
+>
 
 export const ResetPasswordForm = ({
   error,
   isLoading,
   onSubmit,
 }: ResetPasswordFormProps): JSX.Element => {
-  const [email, setEmail] = useState('')
+  const {
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm<ResetPasswordFormDataT>({
+    resolver: zodResolver(schema),
+  })
 
-  const resetForm = (): void => {
-    setEmail('')
+  const onSubmitForm = (data: ResetPasswordFormDataT): void => {
+    onSubmit(data, reset)
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault()
-    onSubmit({ email }, resetForm)
-  }
+  const combineErrors = useMemo(
+    () => ({
+      email: errors.email?.message || error?.email,
+    }),
+    [error?.email, errors.email?.message],
+  )
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmitForm)}>
       <Stack gap={25}>
         <Stack gap={5}>
-          <Input
-            onChange={setEmail}
-            value={email}
-            required
-            type="email"
-            placeholder="Enter your email"
+          <Controller
+            name="email"
+            control={control}
+            defaultValue=""
+            render={({ field }) => (
+              <Input
+                {...field}
+                placeholder="Enter your email"
+                isError={!!combineErrors.email}
+              />
+            )}
           />
+          {combineErrors.email && <Text status="error">{combineErrors.email}</Text>}
+
           {error.email ? <Text status="error">{error.email}</Text> : null}
         </Stack>
 
