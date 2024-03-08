@@ -1,8 +1,10 @@
+import type { ReactNode } from 'react'
+
 import s from 'src/components/Button/styles.module.css'
 
 type ButtonProps = {
   variant?: 'contained' | 'outlined'
-  icon?: JSX.Element
+  icon?: ReactNode
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 const Button = ({
@@ -10,7 +12,6 @@ const Button = ({
   icon,
   children,
   className,
-
   ...props
 }: ButtonProps): JSX.Element => {
   return (

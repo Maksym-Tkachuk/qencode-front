@@ -7,10 +7,7 @@ import { AuthLayout } from 'src/layouts/AuthLayout'
 const ForgotPassword = (): JSX.Element => {
   const { error, isLoading, mutate } = useResetPassword()
 
-  const handleSubmit = async (
-    data: ResetPasswordFormDataT,
-    reset: () => void,
-  ): Promise<void> => {
+  const handleSubmit = (data: ResetPasswordFormDataT, reset: () => void): void => {
     mutate(data, {
       onSuccess: reset,
     })

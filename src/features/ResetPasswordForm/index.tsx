@@ -68,8 +68,13 @@ export const ResetPasswordForm = ({
           {error.email ? <Text status="error">{error.email}</Text> : null}
         </Stack>
 
-        <Button disabled={isLoading} type="submit" variant="contained">
-          {isLoading ? <Loader color="white" size={12} /> : 'Send'}
+        <Button
+          disabled={isLoading}
+          type="submit"
+          variant="contained"
+          icon={isLoading && <Loader color="white" size={20} />}
+        >
+          {!isLoading && 'Send'}
         </Button>
 
         <Link to={RoutesPath.LOGIN}>

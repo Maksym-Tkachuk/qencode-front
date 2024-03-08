@@ -15,10 +15,7 @@ import s from 'src/pages/Login/styles.module.css'
 const Login = (): JSX.Element => {
   const { error, isLoading, mutate } = useLogin()
 
-  const handleSubmit = async (
-    data: LoginFormDataT,
-    reset: () => void,
-  ): Promise<void> => {
+  const handleSubmit = (data: LoginFormDataT, reset: () => void): void => {
     mutate(data, {
       onSuccess: reset,
     })

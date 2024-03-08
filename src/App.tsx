@@ -1,21 +1,16 @@
 import { Suspense } from 'react'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClientProvider } from 'react-query'
 import { RouterProvider } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import Loader from 'src/components/Loader'
 import Stack from 'src/components/Stack'
+import { queryClient } from 'src/configs/queryClient'
 import { Router } from 'src/router'
 
 import 'src/styles/fonts.css'
 import 'src/styles/normalize.css'
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: { retry: false, refetchOnWindowFocus: false, refetchOnMount: false },
-  },
-})
 
 const App = (): JSX.Element => {
   return (

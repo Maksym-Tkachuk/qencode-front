@@ -79,8 +79,13 @@ export const NewPasswordForm = ({
           )}
         </Stack>
 
-        <Button disabled={isLoading} type="submit" variant="contained">
-          {isLoading ? <Loader color="white" size={12} /> : 'Reset Password'}
+        <Button
+          disabled={isLoading}
+          type="submit"
+          variant="contained"
+          icon={isLoading && <Loader color="white" size={20} />}
+        >
+          {!isLoading && 'Reset Password'}
         </Button>
       </Stack>
     </form>

@@ -6,6 +6,7 @@ import type { LoginFormErrorFieldsT } from 'src/features/LoginForm/types'
 import type { LoginArgsT, ResponseLoginT } from 'src/services/api/login/types'
 import type { ResponseErrorT } from 'src/types'
 
+import { handleError } from 'src/configs/queryClient'
 import { ErrorStatus, LocalStorageKeys } from 'src/constants'
 import { isString } from 'src/helpers/isString'
 import { parseError } from 'src/helpers/parseError'
@@ -29,14 +30,12 @@ export const useLogin = () => {
       toast.success('The user has successfully logged!')
     },
     onError: e => {
+      handleError(e)
+
       const errorDetail = e.response?.data.detail
 
       if (ErrorStatus.INVALID_USER === e.response?.status && isString(errorDetail)) {
         toast.error(errorDetail)
-      }
-
-      if (e.response?.status && e.response?.status >= 500) {
-        toast.error('Server error!')
       }
     },
   })

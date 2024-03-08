@@ -87,8 +87,9 @@ export const LoginForm = ({
         className={s.button}
         variant="contained"
         type="submit"
+        icon={isLoading && <Loader color="white" size={20} />}
       >
-        {isLoading ? <Loader color="white" size={12} /> : 'Log in to Qencode'}
+        {!isLoading && 'Log in to Qencode'}
       </Button>
     </form>
   )
