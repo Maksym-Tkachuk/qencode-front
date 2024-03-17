@@ -4,28 +4,28 @@ import path from 'path'
 
 import type pck from '../package.json'
 
-import { clearConsoleLine } from '../app-scripts/clearConsoleLine'
-import { startSpinner } from '../app-scripts/dotsSpinner'
-import { execSyncTrimmedString } from '../app-scripts/execSyncTrimmedString'
-import { logError, logInfo, logSuccess } from '../app-scripts/prettyLog'
+import { cleanConsoleLine } from './helpers/cleanConsoleLine'
+import { triggerSpinner } from './helpers/triggerSpinner'
+import { syncRunTrimmed } from './helpers/syncRunTrimmed'
+import { logError, logInfo, logSuccess } from './helpers/logs'
 
-const BRANCH_NAME_PATTERN = /^(feature|fix|infra)(\/.+)?|(dev|main)(\/.+)?$/gi
+const BRANCH_NAME_PATTERN = /^(feature|fix)(\/.+)?|(dev|main)(\/.+)?$/gi
 
 const { log } = console
 
 const validateTypes = async (): Promise<void> => {
   return new Promise<void>((resolve, reject) => {
-    const stagedFiles = execSyncTrimmedString('git diff --cached --name-only')
+    const stagedFiles = syncRunTrimmed('git diff --cached --name-only')
 
     if (!stagedFiles) {
       reject(new Error(`❌ No files are staged in the Git index.`))
     }
 
-    const spinnerInterval = startSpinner('Running type checking')
+    const spinnerInterval = triggerSpinner('Running type checking')
 
     exec('npx tsc --noEmit', (error, stdout) => {
       clearInterval(spinnerInterval)
-      clearConsoleLine()
+      cleanConsoleLine()
 
       if (error) {
         if (stdout) {
@@ -43,11 +43,11 @@ const validateTypes = async (): Promise<void> => {
 
 const validateCodeStyle = async (): Promise<void> => {
   return new Promise<void>((resolve, reject) => {
-    const spinnerInterval = startSpinner('Checking code style')
+    const spinnerInterval = triggerSpinner('Checking code style')
 
     exec('npx lint-staged', (error, _stdout, stderr) => {
       clearInterval(spinnerInterval)
-      clearConsoleLine()
+      cleanConsoleLine()
 
       if (error) {
         if (stderr) {
@@ -65,7 +65,7 @@ const validateCodeStyle = async (): Promise<void> => {
 
 const validateBranchName = async (): Promise<void> => {
   return new Promise<void>((resolve, reject) => {
-    const branchName = execSyncTrimmedString('git rev-parse --abbrev-ref HEAD')
+    const branchName = syncRunTrimmed('git rev-parse --abbrev-ref HEAD')
 
     if (branchName === 'main') {
       type PackageJson = typeof pck
@@ -75,8 +75,8 @@ const validateBranchName = async (): Promise<void> => {
         readFileSync(PACKAGE_JSON_PATH, 'utf-8'),
       ) as PackageJson
 
-      const email = execSyncTrimmedString('git config user.email')
-      const userName = execSyncTrimmedString('git config user.name')
+      const email = syncRunTrimmed('git config user.email')
+      const userName = syncRunTrimmed('git config user.name')
       const authorName = packageJson.author.name
       const authorEmail = packageJson.author.email
 

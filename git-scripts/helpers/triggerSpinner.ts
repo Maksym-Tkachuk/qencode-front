@@ -6,7 +6,7 @@ const dots = {
   frames: ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'],
 }
 
-export const startSpinner = (message: string): NodeJS.Timeout => {
+export const triggerSpinner = (message: string): NodeJS.Timeout => {
   let i = 0
   const interval = setInterval(() => {
     process.stdout.write(

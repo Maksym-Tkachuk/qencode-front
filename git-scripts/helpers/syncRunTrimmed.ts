@@ -1,5 +1,5 @@
 import { execSync } from 'child_process'
 
-export const execSyncTrimmedString = (command: string): string => {
+export const syncRunTrimmed = (command: string): string => {
   return execSync(command).toString().trim()
 }
